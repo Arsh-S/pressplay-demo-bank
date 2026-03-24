@@ -7,6 +7,17 @@ const transactions = [
   { id: 6, name: "Spotify Premium", category: "Entertainment", amount: -9.99, date: "Mar 16, 2026", icon: "M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" },
 ];
 
+const budgetCategories = [
+  { name: "Food & Dining", spent: 820, budget: 1200, color: "bg-orange-500", bgColor: "bg-orange-100", textColor: "text-orange-700" },
+  { name: "Transport", spent: 340, budget: 500, color: "bg-blue-500", bgColor: "bg-blue-100", textColor: "text-blue-700" },
+  { name: "Entertainment", spent: 180, budget: 300, color: "bg-purple-500", bgColor: "bg-purple-100", textColor: "text-purple-700" },
+  { name: "Shopping", spent: 650, budget: 800, color: "bg-pink-500", bgColor: "bg-pink-100", textColor: "text-pink-700" },
+  { name: "Utilities", spent: 210, budget: 400, color: "bg-teal-500", bgColor: "bg-teal-100", textColor: "text-teal-700" },
+];
+
+const totalSpent = 3200;
+const totalBudget = 5000;
+
 export default function Dashboard() {
   return (
     <div className="max-w-6xl">
@@ -69,6 +80,68 @@ export default function Dashboard() {
               <p className="text-xs text-gray-500">Manage payments</p>
             </div>
           </button>
+        </div>
+      </div>
+
+      {/* Budget Tracker */}
+      <div className="rounded-2xl border border-gray-200 bg-white shadow-sm mb-8">
+        <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100">
+              <svg className="h-4 w-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h2 className="text-lg font-semibold text-gray-900">Budget Tracker</h2>
+          </div>
+          <button className="rounded-lg bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 transition-colors hover:bg-indigo-100">
+            Set Budget
+          </button>
+        </div>
+
+        <div className="p-6">
+          {/* Overall Progress */}
+          <div className="mb-6">
+            <div className="flex items-end justify-between mb-2">
+              <div>
+                <p className="text-sm text-gray-500">Total spending this month</p>
+                <p className="text-2xl font-bold text-gray-900">${totalSpent.toLocaleString()} <span className="text-base font-normal text-gray-400">of ${totalBudget.toLocaleString()}</span></p>
+              </div>
+              <p className="text-sm font-medium text-amber-600">{Math.round((totalSpent / totalBudget) * 100)}% used</p>
+            </div>
+            <div className="h-3 w-full rounded-full bg-gray-100">
+              <div
+                className="h-3 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 transition-all"
+                style={{ width: `${(totalSpent / totalBudget) * 100}%` }}
+              />
+            </div>
+            <p className="mt-2 text-xs text-gray-400">${(totalBudget - totalSpent).toLocaleString()} remaining this month</p>
+          </div>
+
+          {/* Category Breakdown */}
+          <div className="space-y-4">
+            {budgetCategories.map((cat) => (
+              <div key={cat.name} className="flex items-center gap-4">
+                <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${cat.bgColor}`}>
+                  <div className={`h-2.5 w-2.5 rounded-full ${cat.color}`} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-sm font-medium text-gray-700">{cat.name}</p>
+                    <p className="text-sm text-gray-500">
+                      <span className={`font-semibold ${cat.textColor}`}>${cat.spent}</span> / ${cat.budget}
+                    </p>
+                  </div>
+                  <div className="h-2 w-full rounded-full bg-gray-100">
+                    <div
+                      className={`h-2 rounded-full ${cat.color} transition-all`}
+                      style={{ width: `${Math.min((cat.spent / cat.budget) * 100, 100)}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
