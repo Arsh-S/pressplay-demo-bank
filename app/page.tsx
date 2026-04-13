@@ -72,6 +72,69 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Credit Score */}
+      <div className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex items-start gap-6">
+          {/* Score ring */}
+          <div className="relative h-28 w-28 flex-shrink-0">
+            <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#e5e7eb" strokeWidth="8" />
+              <circle
+                cx="50" cy="50" r="42"
+                fill="none"
+                stroke="url(#scoreGradient)"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeDasharray={`${(742 / 850) * 264} 264`}
+              />
+              <defs>
+                <linearGradient id="scoreGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#10b981" />
+                  <stop offset="100%" stopColor="#6366f1" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <p className="text-2xl font-bold text-gray-900 leading-none">742</p>
+              <p className="text-[10px] font-medium text-emerald-600 uppercase tracking-wider mt-1">Good</p>
+            </div>
+          </div>
+
+          {/* Details */}
+          <div className="flex-1 min-w-0">
+            <div className="mb-3 flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">Credit Score</h2>
+                <p className="text-xs text-gray-500">Last updated today · FICO 8</p>
+              </div>
+              <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700">+12 this month</span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              <div className="rounded-lg bg-gray-50 p-2.5">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider">Payment History</p>
+                <p className="text-sm font-semibold text-gray-900 mt-0.5">Excellent</p>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-2.5">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider">Utilization</p>
+                <p className="text-sm font-semibold text-gray-900 mt-0.5">18%</p>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-2.5">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider">Age</p>
+                <p className="text-sm font-semibold text-gray-900 mt-0.5">6.2 yrs</p>
+              </div>
+            </div>
+
+            <button className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-700">
+              View full report
+              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Recent Transactions */}
       <div className="rounded-2xl border border-gray-200 bg-white shadow-sm">
         <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
