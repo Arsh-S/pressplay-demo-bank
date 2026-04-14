@@ -72,6 +72,107 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Credit Score */}
+      <div className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex items-start gap-6">
+          {/* Score ring */}
+          <div className="relative h-28 w-28 flex-shrink-0">
+            <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#e5e7eb" strokeWidth="8" />
+              <circle
+                cx="50" cy="50" r="42"
+                fill="none"
+                stroke="url(#scoreGradient)"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeDasharray={`${(742 / 850) * 264} 264`}
+              />
+              <defs>
+                <linearGradient id="scoreGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#10b981" />
+                  <stop offset="100%" stopColor="#6366f1" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <p className="text-2xl font-bold text-gray-900 leading-none">742</p>
+              <p className="text-[10px] font-medium text-emerald-600 uppercase tracking-wider mt-1">Good</p>
+            </div>
+          </div>
+
+          {/* Details */}
+          <div className="flex-1 min-w-0">
+            <div className="mb-3 flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">Credit Score</h2>
+                <p className="text-xs text-gray-500">Last updated today · FICO 8</p>
+              </div>
+              <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700">+12 this month</span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              <div className="rounded-lg bg-gray-50 p-2.5">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider">Payment History</p>
+                <p className="text-sm font-semibold text-gray-900 mt-0.5">Excellent</p>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-2.5">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider">Utilization</p>
+                <p className="text-sm font-semibold text-gray-900 mt-0.5">18%</p>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-2.5">
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider">Age</p>
+                <p className="text-sm font-semibold text-gray-900 mt-0.5">6.2 yrs</p>
+              </div>
+            </div>
+
+            <details className="group">
+              <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-700 select-none">
+                <span className="group-open:hidden">View full report</span>
+                <span className="hidden group-open:inline">Hide full report</span>
+                <svg className="h-3.5 w-3.5 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </summary>
+
+              <div className="mt-5 space-y-4 border-t border-gray-100 pt-5">
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <p className="text-xs font-medium text-gray-600">Score trend (last 6 months)</p>
+                    <p className="text-xs font-semibold text-emerald-600">+38 pts</p>
+                  </div>
+                  <div className="flex items-end gap-1 h-14">
+                    {[58, 62, 60, 68, 72, 78].map((h, i) => (
+                      <div key={i} className="flex-1 rounded-t bg-gradient-to-t from-indigo-400 to-emerald-400" style={{ height: `${h}%` }} />
+                    ))}
+                  </div>
+                  <div className="flex justify-between mt-1 text-[10px] text-gray-400">
+                    <span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-lg border border-gray-200 p-3">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-500">Open accounts</p>
+                    <p className="text-lg font-bold text-gray-900 mt-1">8</p>
+                    <p className="text-[11px] text-gray-500">4 credit cards, 2 loans, 2 other</p>
+                  </div>
+                  <div className="rounded-lg border border-gray-200 p-3">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-500">Hard inquiries</p>
+                    <p className="text-lg font-bold text-gray-900 mt-1">1</p>
+                    <p className="text-[11px] text-gray-500">In the last 2 years</p>
+                  </div>
+                </div>
+
+                <div className="rounded-lg bg-indigo-50 p-3">
+                  <p className="text-xs font-semibold text-indigo-900 mb-1">💡 Tip to reach 800+</p>
+                  <p className="text-[11px] text-indigo-800 leading-relaxed">Keep utilization under 10% on all cards and avoid new credit applications for the next 6 months.</p>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
       {/* Recent Transactions */}
       <div className="rounded-2xl border border-gray-200 bg-white shadow-sm">
         <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
